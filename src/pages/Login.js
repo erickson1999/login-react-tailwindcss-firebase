@@ -4,13 +4,13 @@ import React, { useState } from "react";
 // react-router
 import { useNavigate, useLocation, Link } from "react-router-dom";
 // icons
-import { FcGoogle } from "react-icons/fc";
 // hooks
 import { useAuth } from "../hooks/useAuth";
 // components
-import { Form } from "./Form";
-import { Alert } from "./Alert";
-import { ForgotPassword } from "./ForgotPassword";
+import { Form } from "../components/Form";
+import { Alert } from "../components/Alert";
+import { ForgotPassword } from "../components/ForgotPassword";
+import { SignInSocial } from "../components/SignInSocial";
 // validations
 const validationsForm = (form) => {
   const errors = {};
@@ -32,6 +32,8 @@ const customMessageError = (err) => {
       return "El email ingresado ya está en uso por favor, ingresa otro.";
     case "auth/weak-password":
       return "la contraseña debe tener más de 6 caracteres, ingresa otra.";
+    case "auth/user-not-found":
+      return "El usuario no existe";
     default:
       return err;
   }
@@ -42,9 +44,9 @@ const initForm = {
   email: "",
   password: "",
 };
-const Login = () => {
+export const Login = () => {
   const [errResponse, setErrResponse] = useState(null);
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth();
   // hooks
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,20 +74,13 @@ const Login = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {
-    loginWithGoogle()
-      .then((res) => {
-        navigate("/perfil");
-      })
-      .catch((err) => {});
-  };
-
   return (
     <div className="m-auto w-full max-w-xs">
       <Form
         initForm={initForm}
         validationsForm={validationsForm}
         submit={submitLogin}
+        submitText={"iniciar sesión"}
         components={{ forgotPassword: <ForgotPassword /> }}
       ></Form>
 
@@ -94,14 +89,7 @@ const Login = () => {
       </span>
       {errResponse && <Alert messageErr={errResponse}></Alert>}
       {msgProtectedRoute && <Alert messageErr={msgProtectedRoute} />}
-      <span className="mb-4 block text-center text-gray-500">Ingresa con:</span>
-      <div className="flex justify-center">
-        <button className="text-4xl" onClick={handleGoogleSignIn}>
-          <FcGoogle></FcGoogle>
-        </button>
-      </div>
+      <SignInSocial></SignInSocial>
     </div>
   );
 };
-
-export default Login;

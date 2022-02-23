@@ -1,13 +1,15 @@
 import React from "react";
-
 // components
-import { Navbar } from "./Navbar";
+import { Navbar } from "../components/Navbar";
 // hooks
 import { useAuth } from "../hooks/useAuth";
 
-const Home = () => {
-  const { state } = useAuth();
+export const Home = () => {
+  const { state,waitingForData } = useAuth();
   const { user } = state;
+  if (waitingForData) {
+    return <></>;
+  }
   // hooks
   return (
     <div className="h-full w-full m-4">
@@ -20,4 +22,3 @@ const Home = () => {
   );
 };
 
-export default Home;

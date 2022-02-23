@@ -1,14 +1,14 @@
 // router
 import { Routes, Route } from "react-router-dom";
 // components
-import Home from "./components/Home";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import Perfil from "./components/Perfil";
+import { Home } from "./pages/Home";
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
+import { Perfil } from "./pages/Perfil";
+import { ResetPassword } from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { RedirectUserLoggedRoute } from "./components/RedirectUserLoggedRoute";
 import { PageNotFound } from "./components/PageNotFound";
-import { ResetPassword } from "./components/ResetPassword";
 function App() {
   return (
     <div className="font-raleway flex  h-screen w-full bg-slate-300">

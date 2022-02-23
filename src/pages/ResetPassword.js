@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "../hooks/useForm";
 import { useAuth } from "../hooks/useAuth";
 // components
-import { Alert } from "./Alert";
+import { Alert } from "../components/Alert";
 import { useNavigate } from "react-router-dom";
 
 // validations
@@ -30,10 +30,10 @@ export const ResetPassword = () => {
         const timeOut = setTimeout(() => {
           navigate("/");
           clearTimeout(timeOut);
-        },10000);
+        }, 10000);
       })
       .catch((err) => {
-        throw new Error({ err });
+        console.err(err);
       });
   };
   const { resetPassword } = useAuth();
@@ -44,7 +44,7 @@ export const ResetPassword = () => {
   );
 
   return (
-    <div className="mx-auto flex sm:w-1/4 w-4/5 flex-col items-center justify-center">
+    <div className="mx-auto flex w-4/5 flex-col items-center justify-center sm:w-1/4">
       <form
         className="mb-1 w-full rounded bg-white px-8 py-7 shadow-md"
         onSubmit={handleSubmit}

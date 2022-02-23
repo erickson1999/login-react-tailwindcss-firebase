@@ -1,15 +1,15 @@
 // packages
 import React, { useState } from "react";
-
 // react-router
 import { useNavigate, Link } from "react-router-dom";
-// icons
-import { FcGoogle } from "react-icons/fc";
+// helpers
+import { helpSetRole } from "../helpers/helpSetRole";
 // hooks
 import { useAuth } from "../hooks/useAuth";
 // components
-import { Alert } from "./Alert";
-import { Form } from "./Form";
+import { Alert } from "../components/Alert";
+import { Form } from "../components/Form";
+import { SignInSocial } from "../components/SignInSocial";
 // validations
 const validationsForm = (form) => {
   const errors = {};
@@ -43,15 +43,16 @@ const initForm = {
   email: "",
   password: "",
 };
-const Register = () => {
+export const Register = () => {
   const [errResponse, setErrResponse] = useState(null);
-  const { signup, loginWithGoogle } = useAuth();
-  const navigate = useNavigate();
+  const { signup } = useAuth();
   const submitRegister = (form) => {
     const { email, password } = form;
     signup(email, password)
       .then((res) => {
-        navigate("/");
+        const data = { email, role: "user" };
+        const uid = res.user.uid;
+        helpSetRole(data, uid);
       })
       .catch((err) => {
         setErrResponse(customMessageError(err.code));
@@ -62,37 +63,20 @@ const Register = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {
-    loginWithGoogle()
-      .then((res) => {
-        navigate("/perfil");
-      })
-      .catch((err) => {
-      });
-  };
-
   return (
     <div className="max-w-ws m-auto w-full max-w-xs">
       <Form
         initForm={initForm}
         validationsForm={validationsForm}
         submit={submitRegister}
+        submitText={"crear cuenta"}
       ></Form>
 
-      <span className="mb-3 block text-right text-sm text-gray-500 hover:text-gray-600 mr-1">
+      <span className="mb-3 mr-1 block text-right text-sm text-gray-500 hover:text-gray-600">
         <Link to="/login">¿Ya tienes una cuenta? ingresa aquí</Link>
       </span>
       {errResponse && <Alert messageErr={errResponse}></Alert>}
-      <span className="mb-4 block text-center text-base text-gray-500">
-        Ingresa con:
-      </span>
-      <div className="flex justify-center">
-        <button className="text-4xl" onClick={handleGoogleSignIn}>
-          <FcGoogle></FcGoogle>
-        </button>
-      </div>
+      <SignInSocial></SignInSocial>
     </div>
   );
 };
-
-export default Register;

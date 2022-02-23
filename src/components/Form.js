@@ -10,6 +10,7 @@ export const Form = ({
   validationsForm,
   submit,
   components = {},
+  submitText,
   ...props
 }) => {
   const { form, errors, handleChange, handleSubmit, handleBlur } = useForm(
@@ -64,7 +65,7 @@ export const Form = ({
       <input
         className="m-auto block cursor-pointer rounded bg-gray-800 py-1 px-2 text-white duration-300 ease-in hover:bg-black hover:text-white"
         type="submit"
-        value="Ingresar"
+        value={submitText}
       />
     </form>
   );

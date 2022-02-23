@@ -6,11 +6,12 @@ import {
   changeFormatDay,
   changeFormatMonth,
 } from "../helpers/helpChangeFormatDate";
+import { Link } from "react-router-dom";
 
 // inits
 const initFechaCuenta = { day: "", dayNumber: null, month: "", year: null };
 
-const Perfil = () => {
+export const Perfil = () => {
   const { state, logout } = useAuth();
   const { user } = state;
   const [fechaCuenta, setFechaCuenta] = useState(initFechaCuenta);
@@ -29,7 +30,7 @@ const Perfil = () => {
     <>
       {user && (
         <main className="font-raleway  flex h-full w-full items-center justify-center">
-          <section className="h-1/2 sm:w-1/4 w-full rounded bg-white py-4 px-4">
+          <section className="h-1/2 sm:w-1/4 w-4/5  rounded bg-white py-4 px-4">
             <label className="block text-center text-xl font-semibold">
               {user.displayName || user.email}
             </label>
@@ -56,13 +57,21 @@ const Perfil = () => {
                 <p>{`${fechaCuenta.day} ${fechaCuenta.numberDay} de ${fechaCuenta.month} del ${fechaCuenta.year}`}</p>
               </div>
             )}
-            <div className="mx-full mt-5 flex justify-center">
+            <div className="mx-full mt-2 flex justify-center">
               <button
                 onClick={logout}
                 className="rounded bg-gray-500 py-1 px-2 text-white"
               >
                 Cerra sesión
               </button>
+            </div>
+            <div className="mx-full mt-1 flex justify-center">
+              <Link
+                to="/"
+                className="rounded bg-gray-500 py-1 px-2 text-white"
+              >
+                ir a inicio
+              </Link>
             </div>
           </section>
         </main>
@@ -71,4 +80,3 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
