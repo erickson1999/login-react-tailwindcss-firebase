@@ -1,7 +1,7 @@
 // packages
 import React, { useState } from "react";
 // react-router
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // helpers
 import { helpSetRole } from "../helpers/helpSetRole";
 // hooks
