@@ -2,13 +2,18 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { helpSetDefaultUserFields } from "../helpers/helpSetDefaultUserFields";
 export const SignInSocial = () => {
   const navigate = useNavigate();
-  const { loginWithGoogle } = useAuth();
-
+  const { loginWithGoogle, state } = useAuth();
+  const { notes } = state;
   const handleGoogleSignIn = () => {
     loginWithGoogle().then((res) => {
-      navigate("/perfil");
+      if (!notes) {
+        const data = { role: "user", notes: [], email: res.user.email };
+        helpSetDefaultUserFields(data, res.user.uid);
+      }
+      navigate("/");
     });
   };
   return (

@@ -32,8 +32,10 @@ const customMessageError = (err) => {
       return "El email ingresado ya está en uso por favor, ingresa otro.";
     case "auth/weak-password":
       return "la contraseña debe tener más de 6 caracteres, ingresa otra.";
-    case "auth/user-not-found":
+    case "auth/user-not-found" :
       return "El usuario no existe";
+    case "auth/wrong-password":
+      return "La contraseña ingresada es incorrecta"
     default:
       return err;
   }

@@ -3,11 +3,8 @@ import { Navigate } from "react-router-dom";
 // hooks
 import { useAuth } from "../hooks/useAuth";
 export const RedirectUserLoggedRoute = ({children,pathRedirect}) => {
-  const { state, waitingForData } = useAuth();
+  const { state } = useAuth();
   const { user } = state;
-  if (waitingForData) {
-    return <></>;
-  }
   if(user) {
     return (
       <Navigate

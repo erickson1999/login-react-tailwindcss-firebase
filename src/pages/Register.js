@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // react-router
 import { Link } from "react-router-dom";
 // helpers
-import { helpSetRole } from "../helpers/helpSetRole";
+import { helpSetDefaultUserFields } from "../helpers/helpSetDefaultUserFields";
 // hooks
 import { useAuth } from "../hooks/useAuth";
 // components
@@ -50,9 +50,9 @@ export const Register = () => {
     const { email, password } = form;
     signup(email, password)
       .then((res) => {
-        const data = { email, role: "user" };
+        const data = { email, role: "user", notes: [] };
         const uid = res.user.uid;
-        helpSetRole(data, uid);
+        helpSetDefaultUserFields(data, uid);
       })
       .catch((err) => {
         setErrResponse(customMessageError(err.code));
@@ -69,7 +69,7 @@ export const Register = () => {
         initForm={initForm}
         validationsForm={validationsForm}
         submit={submitRegister}
-        submitText={"crear cuenta"}
+        submitText={"Crear cuenta"}
       ></Form>
 
       <span className="mb-3 mr-1 block text-right text-sm text-gray-500 hover:text-gray-600">

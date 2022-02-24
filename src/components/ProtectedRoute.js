@@ -5,13 +5,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const ProtectedRoute = ({ children }) => {
-  const { state, waitingForData } = useAuth();
+  const { state } = useAuth();
   const location = useLocation();
   const { pathname } = location;
   const { user } = state;
-  if (waitingForData) {
-    return <></>;
-  }
   if (!user) {
     return (
       <Navigate

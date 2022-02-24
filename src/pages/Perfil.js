@@ -30,13 +30,14 @@ export const Perfil = () => {
     <>
       {user && (
         <main className="font-raleway  flex h-full w-full items-center justify-center">
-          <section className="h-1/2 sm:w-1/4 w-4/5  rounded bg-white py-4 px-4">
+          <section className="flex h-1/2 w-4/5 flex-col justify-between rounded bg-white py-4 px-4 sm:w-1/4">
             <label className="block text-center text-xl font-semibold">
               {user.displayName || user.email}
             </label>
             {user.photoURL && (
               <figure className="mt-2 flex w-full justify-center">
                 <img
+                  referrerpolicy="no-referrer"
                   className="rounded-full object-cover"
                   src={user.photoURL}
                   alt={`foto de perfil del usuario ${
@@ -57,19 +58,15 @@ export const Perfil = () => {
                 <p>{`${fechaCuenta.day} ${fechaCuenta.numberDay} de ${fechaCuenta.month} del ${fechaCuenta.year}`}</p>
               </div>
             )}
-            <div className="mx-full mt-2 flex justify-center">
+
+            <div className="mx-full mt-1 flex justify-evenly">
               <button
                 onClick={logout}
                 className="rounded bg-gray-500 py-1 px-2 text-white"
               >
                 Cerra sesión
               </button>
-            </div>
-            <div className="mx-full mt-1 flex justify-center">
-              <Link
-                to="/"
-                className="rounded bg-gray-500 py-1 px-2 text-white"
-              >
+              <Link to="/" className="rounded bg-gray-500 py-1 px-2 text-white">
                 ir a inicio
               </Link>
             </div>
@@ -79,4 +76,3 @@ export const Perfil = () => {
     </>
   );
 };
-

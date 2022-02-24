@@ -47,7 +47,7 @@ export const Form = ({
           className="mb-2 block text-base text-gray-700"
           htmlFor="password"
         >
-          Password
+          Contraseña
         </label>
         <input
           className="w-full rounded border border-gray-400 py-1 pl-1"
